@@ -1,16 +1,19 @@
 ﻿import './App.css'
 import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from './store/store'
 import { createTaskThunk, fetchTasks, setPage, setSort, updateTaskThunk, addTaskLocal, updateTaskLocal } from './store/tasksSlice'
 import { TodoItem } from './components/TodoItem/TodoItem'
 import { AddTodoForm } from './components/AddTodoForm/AddTodoForm'
-import { LoginForm } from './components/LoginForm/LoginForm'
+import { LoginPage } from './pages/LoginPage/LoginPage'
 import Button from './components/ui/Button/Button'
+import { logout } from './store/authSlice'
 
-function App() {
+function AppContent() {
   const dispatch = useAppDispatch()
   const { items, page, pages, sort, order, status } = useAppSelector(s => s.tasks)
   const { token } = useAppSelector(s => s.auth)
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(fetchTasks())
@@ -46,7 +49,10 @@ function App() {
 
   return (
     <div className="app">
-      <LoginForm />
+      {
+        token ? <Button onClick={() => dispatch(logout())}>Выйти</Button> : <Button onClick={() => navigate('/login')}>Авторизоваться</Button>
+      }
+      
       <AddTodoForm onAdd={addTask} />
 
       <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
@@ -98,6 +104,17 @@ function App() {
         </Button>
       </div>
     </div>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<AppContent />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

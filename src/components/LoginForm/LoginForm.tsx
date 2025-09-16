@@ -1,28 +1,28 @@
 import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../store/store'
-import { login, logout } from '../../store/authSlice'
+import { login } from '../../store/authSlice'
 import styles from './styles.module.css'
 import Button from '../ui/Button/Button'
 import Input from '../ui/Input/Input'
 
-export function LoginForm() {
+interface LoginFormProps {
+  onSuccess?: () => void;
+}
+
+export function LoginForm({ onSuccess }: LoginFormProps) {
   const dispatch = useAppDispatch()
-  const { token, status, error } = useAppSelector(s => s.auth)
+  const { status, error } = useAppSelector(s => s.auth)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    dispatch(login({ username, password }))
-  }
-
-  if (token) {
-    return (
-      <div className={styles.loggedInRow}>
-        <span>Админ вошёл</span>
-        <Button onClick={() => dispatch(logout())}>Выйти</Button>
-      </div>
-    )
+    try {
+      await dispatch(login({ username, password })).unwrap()
+      onSuccess?.()
+    } catch (err) {
+      console.error('Login failed:', err)
+    }
   }
 
   return (
