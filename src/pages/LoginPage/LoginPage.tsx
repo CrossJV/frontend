@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { LoginForm } from '../../components/LoginForm/LoginForm'
 import Button from '../../components/ui/Button/Button'
+import styles from './styles.module.css'
 
 export function LoginPage() {
   const navigate = useNavigate()
@@ -10,7 +11,7 @@ export function LoginPage() {
   }
 
   return (
-    <div className="login-page" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
+    <div className={styles.loginPage}>
       <h2>Авторизация</h2>
       <LoginForm onSuccess={handleLoginSuccess} />
       <Button onClick={() => navigate('/')}>Назад</Button>

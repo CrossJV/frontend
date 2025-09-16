@@ -97,3 +97,14 @@ h1 {
   font-size: 14px;
   outline: none;
 }
+
+.button-wrapper {
+  display: 'flex'; 
+  gap: 8;
+  margin-top: 16px; 
+  justify-content: center;
+}
+
+.paggination-label {
+  align-self: center;
+}

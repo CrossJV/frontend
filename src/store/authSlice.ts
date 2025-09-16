@@ -9,8 +9,10 @@ interface AuthState {
 	error: string | null
 }
 
+const savedToken = localStorage.getItem("token")
+
 const initialState: AuthState = {
-	token: null,
+	token: savedToken,
 	status: 'idle',
 	error: null,
 }
@@ -45,9 +47,15 @@ const authSlice = createSlice({
 			state.token = null
 			state.status = 'idle'
 			state.error = null
+			localStorage.removeItem("token")
 		},
 		setToken(state, action: PayloadAction<string | null>) {
 			state.token = action.payload
+			if (action.payload) {
+				localStorage.setItem("token", action.payload)
+			} else {
+				localStorage.removeItem("token")
+			}
 		},
 	},
 	extraReducers: (builder) => {
@@ -59,6 +67,7 @@ const authSlice = createSlice({
 			.addCase(login.fulfilled, (state, action) => {
 				state.status = 'succeeded'
 				state.token = action.payload
+				localStorage.setItem("token", action.payload)
 			})
 			.addCase(login.rejected, (state, action) => {
 				state.status = 'failed'
