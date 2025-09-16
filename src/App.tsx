@@ -10,6 +10,7 @@ import { SortButton } from "./components/SortButton/SortButton"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { useAppDispatch } from "./store/store"
+import { useEffect } from "react"
 
 function AppContent() {
   const {
@@ -97,6 +98,20 @@ function AppContent() {
 }
 
 function App() {
+    const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'token' && e.newValue === null) {
+        dispatch(logout())
+      }
+    }
+    window.addEventListener('storage', onStorage)
+    return () => {
+      window.removeEventListener('storage', onStorage)
+    }
+  }, [dispatch])
+
   return (
     <BrowserRouter>
       <Routes>
