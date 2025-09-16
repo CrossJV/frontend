@@ -47,7 +47,8 @@ export function TodoItem({
         <div className={styles.infoRow}>
           <strong>{username}</strong>
           <span className={styles.email}>&lt;{email}&gt;</span>
-          {editedByAdmin && <span className={styles.edited}>(отредактировано админом)</span>}
+          {completed && <span className={styles.edited}>(выполнено)</span>}
+          {editedByAdmin && <span className={styles.edited}>(отредактировано админом)</span>} 
         </div>
         {isEditing ? (
           <Input
