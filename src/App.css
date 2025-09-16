@@ -1,0 +1,99 @@
+﻿.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #ffffff;
+  color: #000000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+h1 {
+  text-align: left;
+  color: #000000;
+  margin: 0 0 16px 0;
+  font-weight: 700;
+}
+
+.loading,
+.empty {
+  text-align: left;
+  padding: 12px 0;
+  color: #000000;
+}
+
+.add-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.add-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #000000;
+  border-radius: 0;
+  font-size: 14px;
+  outline: none;
+  background: #ffffff;
+  color: #000000;
+}
+
+.add-input:focus {
+  box-shadow: none;
+}
+
+.add-btn {
+  padding: 10px 16px;
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.todos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 5px;
+  border: 1px solid #3d3d3d;
+  padding: 10px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #000000;
+}
+
+.todo-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.todo-title {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #000000;
+}
+
+.todo-title.completed {
+  text-decoration: line-through;
+}
+
+.todo-edit-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  border-radius: 0;
+  font-size: 14px;
+  outline: none;
+}
