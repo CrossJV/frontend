@@ -34,12 +34,13 @@ function AppContent() {
   return (
     <div className="app">
       <ToastContainer position="top-center" autoClose={3000} />
-
-      {token ? (
-        <Button onClick={() => dispatch(logout())}>Выйти</Button>
-      ) : (
-        <Button onClick={() => navigate("/login")}>Авторизоваться</Button>
-      )}
+      <div className="login">
+        {token ? (
+          <Button onClick={() => dispatch(logout())}>Выйти</Button>
+        ) : (
+          <Button onClick={() => navigate("/login")}>Авторизоваться</Button>
+        )}
+      </div>
 
       <AddTodoForm onAdd={addTask} />
 
