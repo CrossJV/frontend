@@ -7,7 +7,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:4000',
+        target: 'backend-xi-two-24.vercel.app',
         changeOrigin: true,
       },
     },
