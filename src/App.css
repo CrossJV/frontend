@@ -100,7 +100,7 @@ h1 {
 
 .button-wrapper {
   display: flex; 
-  gap: 8;
+  gap: 8px;
   margin-top: 16px; 
   margin-bottom: 16px; 
   justify-content: center;
