@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+
 interface AuthState {
 	token: string | null
 	status: 'idle' | 'loading' | 'succeeded' | 'failed'
@@ -17,7 +19,7 @@ export const login = createAsyncThunk(
 	'auth/login',
 	async ({ username, password }: { username: string; password: string }, { rejectWithValue }) => {
 		try {
-			const res = await fetch('/api/login', {
+			const res = await fetch(`${API_BASE_URL}/api/login`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ username, password }),

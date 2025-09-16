@@ -2,6 +2,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+
 export type SortField = 'username' | 'email' | 'status'
 export type SortOrder = 'asc' | 'desc'
 
@@ -55,7 +57,7 @@ export const fetchTasks = createAsyncThunk<PaginatedResult, void, { state: { tas
 		const state = getState() as { tasks: TasksState }
 		const { page, sort, order } = state.tasks
 		try {
-			const res = await fetch(`/api/tasks?page=${page}&sort=${sort}&order=${order}`)
+			const res = await fetch(`${API_BASE_URL}/api/tasks?page=${page}&sort=${sort}&order=${order}`)
 			if (!res.ok) return rejectWithValue('failed_to_fetch')
 			const data = (await res.json()) as PaginatedResult
 			return data
@@ -69,7 +71,7 @@ export const createTaskThunk = createAsyncThunk<Task, { username: string; email:
 	'tasks/create',
 	async (payload, { rejectWithValue }) => {
 		try {
-			const res = await fetch('/api/tasks', {
+			const res = await fetch(`${API_BASE_URL}/api/tasks`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(payload),
@@ -93,7 +95,7 @@ export const updateTaskThunk = createAsyncThunk<
 		try {
 			const state = getState()
 			const token: string | null = state.auth?.token ?? null
-			const res = await fetch(`/api/tasks/${id}`, {
+			const res = await fetch(`${API_BASE_URL}/api/tasks/${id}`, {
 				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json',
